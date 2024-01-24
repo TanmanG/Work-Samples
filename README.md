@@ -1,2 +1,2 @@
-# Work-Samples
-A collection of work samples of my programming.
+# Work Samples
+Within this repo is a collection of various pieces of work I've done on different projects.
