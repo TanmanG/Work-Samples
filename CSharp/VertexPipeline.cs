@@ -10,6 +10,32 @@ public enum Axis
 public static class VertexPipeline
 {
     // PERSPECTIVE RENDERING
+    public static Matrix4x4 GetPerspectiveMatrix(float aspectRatio, float fov,
+                                               float nearClippingDistance,
+                                               float farClippingDistance)
+    {
+        fov *= MathF.PI / 180;
+
+        if (nearClippingDistance <= 0)
+            throw new Exception("Near clipping distance must be non-zero and positive!");
+        if (farClippingDistance <= 0)
+            throw new Exception("Far clipping distance must be non-zero and positive!");
+        if (fov is <= 0 or >= 180)
+            throw new Exception("FOV must be between 0 and 180!");
+        if (aspectRatio <= 0)
+            throw new Exception("Aspect Ratio must be non-zero and positive!");
+
+        Matrix4x4 perspectiveMatrix = new()
+        {
+            M11 = 1 / (aspectRatio * MathF.Tan(fov / 2)),
+            M22 = 1 / MathF.Tan(fov / 2),
+            M33 = -(farClippingDistance + nearClippingDistance) / (farClippingDistance - nearClippingDistance),
+            M34 = -2 * nearClippingDistance * farClippingDistance / (farClippingDistance - nearClippingDistance),
+            M43 = -1,
+        };
+
+        return perspectiveMatrix;
+    }
     public static float[,] ComputeVertexNDCs(List<Vector3> vertices, Matrix4x4 perspectiveMatrix, Vector3 position, Vector3 front, Vector3 right)
     {
         Vector3 up = Vector3.Cross(front, right);
@@ -38,32 +64,6 @@ public static class VertexPipeline
                                                 perspectiveMatrix: perspectiveMatrix));
 
         return Vector3ListToArray(processedVectors);
-    }
-    public static Matrix4x4 GetPerspectiveMatrix(float aspectRatio, float fov,
-                                               float nearClippingDistance,
-                                               float farClippingDistance)
-    {
-        fov *= MathF.PI / 180;
-
-        if (nearClippingDistance <= 0)
-            throw new Exception("Near clipping distance must be non-zero and positive!");
-        if (farClippingDistance <= 0)
-            throw new Exception("Far clipping distance must be non-zero and positive!");
-        if (fov is <= 0 or >= 180)
-            throw new Exception("FOV must be between 0 and 180!");
-        if (aspectRatio <= 0)
-            throw new Exception("Aspect Ratio must be non-zero and positive!");
-
-        Matrix4x4 perspectiveMatrix = new()
-        {
-            M11 = 1 / (aspectRatio * MathF.Tan(fov / 2)),
-            M22 = 1 / MathF.Tan(fov / 2),
-            M33 = -(farClippingDistance + nearClippingDistance) / (farClippingDistance - nearClippingDistance),
-            M34 = -2 * nearClippingDistance * farClippingDistance / (farClippingDistance - nearClippingDistance),
-            M43 = -1,
-        };
-
-        return perspectiveMatrix;
     }
     public static List<Vector4> GetHomogenizedVectors(List<Vector3> inputVectors, Matrix4x4 perspectiveMatrix)
     {
