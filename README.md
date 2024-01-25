@@ -10,7 +10,7 @@ A .NET CLI tool which produces .XSD schema from .XML files. It works by recursiv
 The synchronization component of a multiplayer lockstep RTS. It's responsible for handling the game lock, propogating player inputs, and advancing the simulation. It maintains synchronization by implementing deterministic lockstep with a server-client model, only advancing the simulation when the inputs of all players has been received on the server at each input snapshot, paired with determistic floating point math to minimize simulation drift.
 
 ## VertexPipeline.cs
-A CPU implementation of a pipeline which converts world-coordinate defined vertices into NDC-space equivalents, applying many linear algebra concepts. It works by: building a perspective matrix for a camera, modifying the perspective matrix to factor in the position/rotation of the camera, homogenizing the vertex positions, then converting the homogenized vectors into NDC-space. This pipeline acts as a middleman between a simulation's objects and its renderer.
+A CPU implementation of a pipeline which converts world-coordinate defined vertices into NDC-space equivalents, applying many linear algebra concepts. It works by: building a perspective matrix for a camera, modifying the perspective matrix to factor in the position/rotation of the camera, homogenizing the vertex positions, then converting the homogenized vectors into NDC-space. This pipeline acts as a middleman between a simulation's objects and its renderer, and was made as a part of a final project for a linear algebra course.
 
 # C Projects
 
