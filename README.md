@@ -1,5 +1,5 @@
 # Work Samples
-Within this repo is a collection of various pieces of programming I've done on different projects. They include C# projects done for game development, hobby work, and college cirriculum, along with C projects done for university coursework. An explaination/brief of each sample follows:
+Within this repo is a collection of various pieces of programming I've done on different projects. The first folder ("CSharp") contains samples from C\# projects I've done for game development, hobby work, and college cirriculum. The second folder ("C") contains C projects done for university coursework. An explaination/brief of each sample follows:
 
 # C\# Projects
 
